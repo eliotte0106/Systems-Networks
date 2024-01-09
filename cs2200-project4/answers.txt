@@ -1,0 +1,64 @@
+CS 2200 Spring 2023
+Project 4
+
+Name: Jihong Park
+GT Username: jpark3027
+
+Problem 1C (FCFS Scheduler)
+----------
+1 CPU:
+    Total execution time: 67.9 s
+
+2 CPU:
+    Total execution time: 39.6 s
+
+4 CPU:
+    Total execution time: 37.1 s
+
+Increasing the number of available CPUs does not have a linear relationship with the wait time for processes.
+Once the number of CPUs reaches a certain point, the bottleneck for execution time shifts from wait time to the actual runtime of the processes.
+For example, when there are 4 CPUs, the total wait time is minimal, so processes can typically get a CPU immediately when needed.
+However, adding more CPUs beyond this point will not decrease the time it takes to run a process, since the actual runtime becomes the limiting factor.
+
+Problem 2B (Round-Robin)
+----------
+
+800ms:
+    Total time spent in READY state: 317.1 s
+
+600ms:
+    Total time spent in READY state: 302.8 s
+
+400ms:
+    Total time spent in READY state: 291.8 s
+
+200ms:
+    Total time spent in READY state: 284.4 s
+
+There is a correlation between the length of timeslice and the time a process has to wait to be executed.
+As the timeslice becomes shorter, the wait time tends to decrease.
+However, in actual operating systems, choosing the shortest possible timeslice is not always the best option.
+This is because the time taken to switch between processes, known as context-switching overhead, increases as the timeslice gets shorter.
+As a result, we may spend more time switching between processes rather than doing actual work.
+This is called thrashing. Therefore, there is a trade-off between reducing wait time and increasing context-switching overhead when choosing the length of timeslice.
+
+
+Problem 3C (Preemptive Priority with Aging)
+----------
+
+One way that operating systems can mitigate starvation in a priority scheduler is by implementing aging. 
+Aging involves gradually increasing the priority of a process as it waits in the queue.
+This means that a process with a lower priority that has been waiting in the queue for a long time will eventually have its priority boosted,
+making it more likely to be scheduled and run by the CPU.
+By using aging, the operating system guarantees that all processes eventually get an opportunity to run,even if they have a lower priority.
+
+Problem 4 (The Priority Inversion Problem)
+---------
+
+To ensure that process P1 can complete its execution before any of the medium priority processes,
+each process can keep track of its dependent processes and check if any of them are in the queue.
+If a process has dependent processes in the queue with higher priorities,
+then the priority of the "parent" process can be raised to the maximum priority of its "children".
+By doing this, the "parent" process will not be starved, and the high priority processes that depend on it will also not be starved.
+In this specific scenario, the window manager will identify that P1 is a high priority process that depends on it and wants to assert itself.
+Therefore, the window manager's priority will be raised to the level of P1, allowing it to run before the medium priority processes and ensuring that P1 will not be starved.
