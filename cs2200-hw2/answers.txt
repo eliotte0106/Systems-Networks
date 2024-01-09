@@ -1,0 +1,16 @@
+CS 2200 Spring 2023
+Homework 2
+
+Name: Jihong Park
+GT Username: jpark3027
+
+Question 1
+----------
+JALR instruction follows that the incremented PC is stored in &ra and
+PC is loaded with the value of the register of &at.
+
+lea $ra, next
+br target
+
+by using lea instruction, the incremented PC is stored into $ra by using 'next' label. After that,
+by using br instruction, PC will be set as incremented PC + offset20.
